@@ -15,7 +15,7 @@ def extract_json(path: str, lines: bool = False, record_path: str | None = None)
         raise FileNotFoundError(f"Файл не найден: {path}")
 
     # Проверяем формат файла
-    if path.suffix().lower() != ".json":
+    if path.suffix.lower() != ".json":
         raise ValueError(f"Формат {path.suffix.lower()} не поддерживается. Ожидается .json")
 
     logger.info(f"Начинаем чтение файла {path.name}")
@@ -62,7 +62,7 @@ def extract_json(path: str, lines: bool = False, record_path: str | None = None)
 
                 if record_path not in data:
                     raise ValueError(f"Ключ {record_path} не найдет в JSON")
-
+                df = pd.json_normalize(data[record_path])
             else:
 
                 # Весь словарь - одна записб, разворачиваем в одну строку

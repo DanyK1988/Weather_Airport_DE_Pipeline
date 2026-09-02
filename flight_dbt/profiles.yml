@@ -1,0 +1,12 @@
+flight_dbt:
+  target: default
+  outputs:
+    default:
+      type: postgres
+      host: "{{ env_var('localhost', 'localhost') }}"
+      port: "{{ env_var('POSTGRES_PORT', '5432') | int }}"
+      user: "{{ env_var('POSTGRES_USER', 'user_1') }}"
+      password: "{{ env_var('POSTGRES_PASSWORD', 'password_1') }}"
+      dbname: "{{ env_var('POSTGRES_DB', 'flight_db') }}"
+      schema: "analytics"
+      threads: 4

@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: stg_weather_api
+    description: "Почасовые наблюдения погоды из Open-Meteo API"
+    columns:
+      - name: airport_iata
+        description: 'Код аэропорта (IATA)'
+        tests:
+          - not_null
+
+      - name: weather_time_utc
+        description: 'Время наблюдения'
+        tests:
+          - not_null
+
+      - name: temperature_2m_c
+        description: 'Температура воздуха(°C)'
+        tests:
+          - not_null
+
+      - name: weathercode
+        description: 'Код погодного состояния'
+        tests:
+          - not_null
+
+      - name: weather_description
+        description: "Описание погоды"
+        tests:
+          - not_null

@@ -54,7 +54,7 @@ def load_to_raw(
         with engine.begin() as conn:
             # проверяем существование таблицы
             table_exists = conn.execute(
-                text(f""""
+                text(f"""
                     SELECT to_regclass(
                     '{schema}.{table_name}')
                     """)
