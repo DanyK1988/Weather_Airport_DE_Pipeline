@@ -1,0 +1,31 @@
+version: 2
+
+models:
+  - name: dim_aircraft
+    description: "Dimension - модель справочника самолетов"
+
+    columns:
+      - name: aircraft_key
+        description: "Технический surrogate ключ самолета"
+        tests:
+          - not_null
+          - unique
+
+      - name: aircraft_type
+        description: "Тип самолета"
+        tests:
+          - not_null
+
+      - name: manufacturer
+        description: "Производитель самолета"
+        tests:
+          - not_null
+
+      - name: seats
+        description: "Количество мест в самолете"
+
+      - name: range_km
+        description: "Дальность полета самолета (км)"
+
+      - name: category
+        description: "Категория самолета (пассажирский, грузовой, военный и т.д.)"
