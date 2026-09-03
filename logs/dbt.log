@@ -203,3 +203,19 @@ Runtime Error
 [0m21:27:46.772719 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x108581810>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1085029f0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1085f0270>]}
 [0m21:27:46.772891 [debug] [MainThread]: Flushing usage events
 [0m21:27:47.920125 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m22:00:43.104334 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x107bb9fd0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x11192f890>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x11192f750>]}
+
+
+============================== 22:00:43.107123 | 42d08bc1-be35-4961-92b3-b21169e06092 ==============================
+[0m22:00:43.107123 [info ] [MainThread]: Running with dbt=1.12.3
+[0m22:00:43.107442 [debug] [MainThread]: running dbt with arguments {'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'invocation_command': 'dbt run --select stg_aerodatabox_arrivals', 'introspect': 'True', 'hints_enabled': 'True', 'partial_parse': 'True', 'static_parser': 'True', 'no_print': 'None', 'log_format': 'default', 'warn_error': 'None', 'send_anonymous_usage_stats': 'True', 'debug': 'False', 'log_cache_events': 'False', 'fail_fast': 'False', 'indirect_selection': 'eager', 'write_json': 'True', 'maximum_seed_size_mib': '1', 'use_experimental_parser': 'False', 'cache_selected_only': 'False', 'quiet': 'False', 'version_check': 'True', 'empty': 'False', 'log_path': 'logs', 'use_colors': 'True', 'profiles_dir': '/Users/danakaliberda/.dbt', 'printer_width': '80'}
+[0m22:00:43.107755 [error] [MainThread]: [[31mERROR[0m]: Encountered an error:
+Runtime Error
+  No dbt_project.yml found at expected path /Users/danakaliberda/VS_Python/Weather_Airport/dbt_project.yml
+  Verify that each entry within packages.yml (and their transitive dependencies) contains a file named dbt_project.yml
+  
+[0m22:00:43.109368 [debug] [MainThread]: Resource report: {"command_name": "run", "command_success": false, "command_wall_clock_time": 0.054057542, "process_in_blocks": "0", "process_kernel_time": 0.167562, "process_mem_max_rss": "127008768", "process_out_blocks": "0", "process_user_time": 0.640228}
+[0m22:00:43.109589 [debug] [MainThread]: Command `dbt run` failed at 22:00:43.109546 after 0.05 seconds
+[0m22:00:43.109740 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x111981810>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1119029f0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1119ec270>]}
+[0m22:00:43.109880 [debug] [MainThread]: Flushing usage events
+[0m22:00:44.003210 [debug] [MainThread]: An error was encountered while trying to flush usage events

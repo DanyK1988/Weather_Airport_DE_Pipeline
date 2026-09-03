@@ -1,0 +1,155 @@
+version: 2
+
+models:
+  - name: fact_weather
+    description: "Таблица фактов погодных наблюдений"
+
+    columns:
+      - name: weather_key
+        description: "Суррогатный ключ погодного события"
+        tests:
+          - not_null
+          - unique
+
+      - name: airport_iata
+        description: "IATA-код аэропорта"
+        tests:
+          - not_null
+
+          - relationships:
+              to: ref('dim_airports')
+              field: airport_iata
+
+      - name: weather_time_utc
+        description: "Время погодного наблюдения UTC"
+        tests:
+          - not_null
+
+      - name: temperature_2m_c
+        description: "Температура воздуха"
+
+      - name: apparent_temperature_c
+        description: "Ощущаемая температура"
+
+      - name: dewpoint_2m_c
+        description: "Точка росы"
+
+      - name: relative_humidity_2m_pct
+        description: "Относительная влажность"
+
+      - name: precipitation_mm
+        description: "Количество осадков"
+
+      - name: rain_mm
+        description: "Количество дождя"
+
+      - name: snowfall_cm
+        description: "Количество снега"
+
+      - name: cloudcover_pct
+        description: "Облачность"
+
+      - name: visibility_m
+        description: "Видимость"
+
+      - name: windspeed_10m_ms
+        description: "Скорость ветра"
+
+      - name: winddirection_10m_deg
+        description: "Направление ветра"
+
+      - name: weathercode
+        description: "Код погодного состояния"
+
+      - name: weather_description
+        description: "Описание погодного состояния"
+
+      - name: weather_date
+        description: "Дата погодного наблюдения"
+
+      - name: weather_hour
+        description: "Час погодного наблюдения"
+
+      - name: weather_day_of_week
+        description: "День недели"
+
+      - name: wind_category
+        description: "Категория силы ветра"
+        tests:
+          - accepted_values:
+              values:
+                - calm
+                - light
+                - moderate
+                - strong
+
+      - name: precipitation_category
+        description: "Категория осадков"
+        tests:
+          - accepted_values:
+              values:
+                - none
+                - light
+                - moderate
+                - heavy
+
+      - name: rain_category
+        description: "Категория дождя"
+        tests:
+          - accepted_values:
+              values:
+                - no_rain
+                - light_rain
+                - moderate_rain
+                - heavy_rain
+
+      - name: temperature_category
+        description: "Категория температуры"
+        tests:
+          - accepted_values:
+              values:
+                - mild
+                - warm
+                - hot
+                - very_hot
+                - extreme_heat
+
+      - name: cloudcover_category
+        description: "Категория облачности"
+        tests:
+          - accepted_values:
+              values:
+                - clear
+                - mostly_clear
+                - partly_cloudy
+                - mostly_cloudy
+                - overcast
+
+      - name: visibility_category
+        description: "Категория видимости"
+        tests:
+          - accepted_values:
+              values:
+                - very_poor
+                - poor
+                - moderate
+                - good
+                - excellent
+
+      - name: is_strong_wind
+        description: "Флаг сильного ветра"
+
+      - name: is_heavy_precipitation
+        description: "Флаг сильных осадков"
+
+      - name: is_heavy_rain
+        description: "Флаг сильного дождя"
+
+      - name: has_thunderstorm
+        description: "Флаг грозы"
+
+      - name: is_overcast
+        description: "Флаг облачности"
+
+      - name: is_low_visibility
+        description: "Флаг плохой видимости"

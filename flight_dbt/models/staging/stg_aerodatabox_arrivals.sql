@@ -42,6 +42,7 @@ with
 
             (arrival ->> 'number')::text as flight_number,
             (arrival ->> 'status')::text as flight_status,
+            (arrival ->> 'callSign')::text as call_sign,
             (arrival ->> 'codeshareStatus')::text as codeshare_status,
             (arrival -> 'airline' ->> 'iata')::text as airline_iata,
             (arrival -> 'airline' ->> 'icao')::text as airline_icao,

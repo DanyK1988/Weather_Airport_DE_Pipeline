@@ -1,0 +1,118 @@
+version: 2
+
+models:
+  - name: fact_flights
+    description: "Таблица фактов рейсов"
+
+    columns:
+      - name: flight_key
+        description: "Суррогатный ключ рейса"
+        tests:
+          - not_null
+          - unique
+
+      - name: flight_number
+        description: "Номер рейса"
+        tests:
+          - not_null
+
+      - name: flight_direction
+        description: "Направление рейса"
+        tests:
+          - not_null
+
+          - accepted_values:
+              values:
+                - arrival
+                - departure
+
+      - name: airline_iata
+        description: "IATA-код авиакомпании"
+        tests:
+          - relationships:
+              to: ref('dim_airlines')
+              field: iata_code
+
+      - name: airport_departure_iata
+        description: "IATA-код аэропорта вылета"
+        tests:
+          - relationships:
+              to: ref('dim_airports')
+              field: airport_iata
+
+      - name: airport_arrival_iata
+        description: "IATA-код аэропорта прилёта"
+        tests:
+          - relationships:
+              to: ref('dim_airports')
+              field: airport_iata
+
+      - name: scheduled_departure_utc
+        description: "Плановое время вылета UTC"
+
+      - name: actual_departure_utc
+        description: "Фактическое время вылета UTC"
+
+      - name: scheduled_arrival_utc
+        description: "Плановое время прилёта UTC"
+
+      - name: actual_arrival_utc
+        description: "Фактическое время прилёта UTC"
+
+      - name: departure_delay_minutes
+        description: "Задержка вылета в минутах"
+
+      - name: arrival_delay_minutes
+        description: "Задержка прилёта в минутах"
+
+      - name: operation_ts
+        description: "Основной timestamp события рейса"
+        tests:
+          - not_null
+
+      - name: operation_date
+        description: "Дата выполнения рейса"
+
+      - name: operation_hour
+        description: "Час выполнения рейса"
+
+      - name: operation_day_of_week
+        description: "День недели выполнения рейса"
+
+      - name: departure_time_status
+        description: "Категория статуса вылета"
+        tests:
+          - accepted_values:
+              values:
+                - unknown
+                - on_time
+                - minor_delay
+                - delayed
+
+      - name: arrival_time_status
+        description: "Категория статуса прилёта"
+        tests:
+          - accepted_values:
+              values:
+                - unknown
+                - on_time
+                - minor_delay
+                - delayed
+
+      - name: flight_status
+        description: "Статус рейса"
+
+      - name: is_cargo
+        description: "Признак грузового рейса"
+
+      - name: aircraft_model
+        description: "Модель самолёта"
+
+      - name: aircraft_registration
+        description: "Регистрационный номер самолёта"
+
+      - name: call_sign
+        description: "Позывной рейса"
+
+      - name: airline_icao
+        description: "ICAO-код авиакомпании"
