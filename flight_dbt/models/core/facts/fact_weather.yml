@@ -4,6 +4,12 @@ models:
   - name: fact_weather
     description: "Таблица фактов погодных наблюдений"
 
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - airport_iata
+            - weather_time_utc
+
     columns:
       - name: weather_key
         description: "Суррогатный ключ погодного события"
@@ -27,6 +33,11 @@ models:
 
       - name: temperature_2m_c
         description: "Температура воздуха"
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: -80
+              max_value: 60
+              inclusive: true
 
       - name: apparent_temperature_c
         description: "Ощущаемая температура"

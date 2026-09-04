@@ -36,9 +36,7 @@ with
     )
 
 select
-    md5(
-        coalesce(airport_iata, '') || coalesce(cast(weather_time_utc as text), '')
-    ) as weather_key,
+    {{ generate_surrogate_key(["airport_iata", "weather_time_utc"]) }} as weather_key,
     airport_iata,
     weather_time_utc,
     temperature_2m_c::numeric as temperature_2m_c,
@@ -70,15 +68,17 @@ select
     end as wind_category,
 
     -- Категория осаднов
-    case
-        when precipitation_mm::numeric >= 10
-        then 'heavy'
-        when precipitation_mm::numeric >= 2.5
-        then 'moderate'
-        when precipitation_mm::numeric > 0
-        then 'light'
-        else 'none'
-    end as precipitation_category,
+    {{
+        range_category(
+            "precipitation_mm::numeric",
+            [
+                {"operator": ">=", "value": 10, "label": "heavy"},
+                {"operator": ">=", "value": 2.5, "label": "moderate"},
+                {"operator": ">", "value": 0, "label": "light"},
+            ],
+            "none",
+        )
+    }} as precipitation_category,
 
     -- Категория дождя
     case
@@ -118,17 +118,18 @@ select
     end as cloudcover_category,
 
     -- категории видимости
-    case
-        when visibility_m::numeric < 1000
-        then 'very_poor'
-        when visibility_m::numeric < 3000
-        then 'poor'
-        when visibility_m::numeric < 5000
-        then 'moderate'
-        when visibility_m::numeric < 10000
-        then 'good'
-        else 'excellent'
-    end as visibility_category,
+    {{
+        range_category(
+            "visibility_m::numeric",
+            [
+                {"operator": "<", "value": 1000, "label": "very_poor"},
+                {"operator": "<", "value": 3000, "label": "poor"},
+                {"operator": "<", "value": 5000, "label": "moderate"},
+                {"operator": "<", "value": 10000, "label": "good"},
+            ],
+            "excellent",
+        )
+    }} as visibility_category,
 
     windspeed_10m_ms::numeric >= 13.9 as is_strong_wind,
     precipitation_mm::numeric >= 10 as is_heavy_precipitation,

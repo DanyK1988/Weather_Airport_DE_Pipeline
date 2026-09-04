@@ -195,19 +195,18 @@ with
 
         select
 
-            md5(
-                coalesce(airline_iata, '')
-                || coalesce(flight_number, '')
-                || coalesce(
-                    cast(
-                        coalesce(scheduled_departure_utc, scheduled_arrival_utc) as text
-                    ),
-                    ''
+            {{
+                generate_surrogate_key(
+                    [
+                        "airline_iata",
+                        "flight_number",
+                        "coalesce(scheduled_departure_utc, scheduled_arrival_utc)",
+                        "airport_departure_iata",
+                        "airport_arrival_iata",
+                        "flight_direction",
+                    ]
                 )
-                || coalesce(airport_departure_iata, '')
-                || coalesce(airport_arrival_iata, '')
-                || coalesce(flight_direction, '')
-            ) as flight_key,
+            }} as flight_key,
 
             flight_number,
             call_sign,
@@ -308,30 +307,8 @@ select
 
     *,
 
-    case
-        when departure_delay_minutes is null
-        then 'unknown'
+    {{ flight_time_status("departure_delay_minutes") }} as departure_time_status,
 
-        when departure_delay_minutes <= 0
-        then 'on_time'
-
-        when departure_delay_minutes <= 15
-        then 'minor_delay'
-
-        else 'delayed'
-    end as departure_time_status,
-
-    case
-        when arrival_delay_minutes is null
-        then 'unknown'
-
-        when arrival_delay_minutes <= 0
-        then 'on_time'
-
-        when arrival_delay_minutes <= 15
-        then 'minor_delay'
-
-        else 'delayed'
-    end as arrival_time_status
+    {{ flight_time_status("arrival_delay_minutes") }} as arrival_time_status
 
 from final

@@ -4,6 +4,17 @@ models:
   - name: fact_flights
     description: "Таблица фактов рейсов"
 
+    tests:
+      - valid_delay_status:
+          arguments: 
+            delay_column: departure_delay_minutes
+            status_column: departure_time_status
+
+      - valid_delay_status:
+          arguments:
+            delay_column: arrival_delay_minutes
+            status_column: arrival_time_status
+
     columns:
       - name: flight_key
         description: "Суррогатный ключ рейса"
@@ -15,6 +26,7 @@ models:
         description: "Номер рейса"
         tests:
           - not_null
+          - is_uppercase
 
       - name: flight_direction
         description: "Направление рейса"
@@ -116,3 +128,54 @@ models:
 
       - name: airline_icao
         description: "ICAO-код авиакомпании"
+
+unit_tests:
+
+    - name: test_departure_time_status
+
+      model: fact_flights
+
+      given:
+
+        - input: ref('stg_aerodatabox_arrivals')
+
+          rows:
+            - {
+                flight_number: 'SU100',
+                call_sign: 'AFL100',
+                flight_status: 'scheduled',
+                is_cargo: false,
+                direction: 'departure',
+
+                airline_iata: 'SU',
+                airline_icao: 'AFL',
+
+                aircraft_model: 'Airbus A320',
+                aircraft_registration: 'RA-12345',
+
+                departure_airport_iata: 'SVO',
+                airport_code: 'HKT',
+
+                scheduled_departure_utc: '2026-01-01 10:00:00',
+                revised_departure_utc: '2026-01-01 10:20:00',
+
+                scheduled_arrival_utc: '2026-01-01 16:00:00',
+                revised_arrival_utc: '2026-01-01 16:15:00'
+              }
+
+        - input: ref('stg_parquet_arrivals')
+          rows: []
+
+        - input: ref('stg_aerodatabox_departures')
+          rows: []
+
+        - input: ref('stg_parquet_departures')
+          rows: []
+
+      expect:
+
+        rows:
+          - {
+              flight_number: 'SU100',
+              departure_time_status: 'delayed'
+            }
