@@ -9,7 +9,7 @@ with
             extracted_at::timestamp as loaded_at,
             payload::jsonb as payload
 
-        from {{ source("raw", "aerodatabox_fids_range") }}
+        from {{ get_raw_source() }}
     ),
 
     arrivals as (

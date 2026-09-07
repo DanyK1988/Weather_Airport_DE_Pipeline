@@ -46,7 +46,7 @@ models:
               field: iata_code
 
       - name: airport_departure_iata
-        description: "IATA-код аэропорта вылета"
+        description: "IATA-код аэропорта вылета самолета"
         tests:
           - relationships:
               to: ref('dim_airports')
