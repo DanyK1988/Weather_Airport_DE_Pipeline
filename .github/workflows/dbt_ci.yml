@@ -15,16 +15,16 @@ jobs:
       postgres:
         image: postgres:15
         env:
-          POSGRES_DB: flight_db
+          POSTGRES_DB: flight_db
           POSTGRES_USER: user_1
           POSTGRES_PASSWORD: password_1
         ports:
           - 5432:5432
-        options:
+        options: >-
           --health-cmd pg_isready
           --health-interval 10s
           --health-timeout 5s
-          --helth-retries 5
+          --health-retries 5
 
     steps:
       - uses: actions/checkout@v4
@@ -53,4 +53,3 @@ jobs:
           POSTGRES_PASSWORD: password_1
           POSTGRES_DB: flight_db
         run: dbt compile --profiles-dir .
-
