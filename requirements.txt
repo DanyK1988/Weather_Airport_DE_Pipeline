@@ -20,3 +20,10 @@ six==1.17.0
 sqlalchemy==2.0.52
 typing-extensions==4.16.0
 urllib3==2.7.0
+jupyter
+matplotlib
+numpy
+scipy
+seaborn
+scikit-learn
+ipykernel

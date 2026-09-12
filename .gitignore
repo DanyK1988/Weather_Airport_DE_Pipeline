@@ -10,3 +10,6 @@ wheels/
 .venv
 .env
 data
+.Trash-0
+.pytest_cache
+.ipynb_checkpoints

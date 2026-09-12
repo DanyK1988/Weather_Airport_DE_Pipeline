@@ -51,7 +51,8 @@ END_DATE = os.getenv("END_DATE")
 def wait_for_db(engine, retries=10, delay=2):
     for i in range(retries):
         try:
-            with engine.connect() as conn:
+            with engine.begin() as conn:
+                conn.execute(text("CREATE SCHEMA IF NOT EXISTS raw"))
                 conn.execute(text("SELECT 1"))
             logger.info("База данных готова")
             return
