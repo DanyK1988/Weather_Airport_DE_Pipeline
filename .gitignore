@@ -13,3 +13,5 @@ data
 .Trash-0
 .pytest_cache
 .ipynb_checkpoints
+airflow/logs/
+env/

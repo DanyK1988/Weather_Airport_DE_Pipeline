@@ -132,3 +132,5 @@
 {"timestamp":"2026-09-12T05:13:16.009093","level":"info","event":"Filling up the DagBag from /opt/airflow/dags/count_weather_raw_rows.py","logger":"airflow.models.dagbag.DagBag"}
 {"timestamp":"2026-09-12T05:13:46.723738","level":"info","event":"Filling up the DagBag from /opt/airflow/dags/count_weather_raw_rows.py","logger":"airflow.models.dagbag.DagBag"}
 {"timestamp":"2026-09-12T05:14:17.510194","level":"info","event":"Filling up the DagBag from /opt/airflow/dags/count_weather_raw_rows.py","logger":"airflow.models.dagbag.DagBag"}
+{"timestamp":"2026-09-12T05:18:54.154604","level":"info","event":"Filling up the DagBag from /opt/airflow/dags/count_weather_raw_rows.py","logger":"airflow.models.dagbag.DagBag"}
+{"timestamp":"2026-09-12T05:19:25.094619","level":"info","event":"Filling up the DagBag from /opt/airflow/dags/count_weather_raw_rows.py","logger":"airflow.models.dagbag.DagBag"}
