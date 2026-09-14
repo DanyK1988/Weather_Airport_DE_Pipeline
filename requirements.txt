@@ -27,3 +27,4 @@ scipy
 seaborn
 scikit-learn
 ipykernel
+kafka-python
