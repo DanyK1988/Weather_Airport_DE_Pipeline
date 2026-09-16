@@ -1,0 +1,7 @@
+version: 2
+sources:
+  - name: flights_raw
+    database: iceberg
+    schema: flights
+    tables:
+      - name: fids_range

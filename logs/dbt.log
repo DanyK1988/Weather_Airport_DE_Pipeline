@@ -235,3 +235,31 @@ Runtime Error
 [0m14:15:00.371062 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x120f81810>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x120f029f0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x120fec270>]}
 [0m14:15:00.371229 [debug] [MainThread]: Flushing usage events
 [0m14:15:01.308916 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m19:36:59.470648 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x112bd1fd0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1160df4d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1160df750>]}
+
+
+============================== 19:36:59.473451 | 32d49468-e516-4085-91d2-b8b0ad374e53 ==============================
+[0m19:36:59.473451 [info ] [MainThread]: Running with dbt=1.12.3
+[0m19:36:59.473750 [debug] [MainThread]: running dbt with arguments {'hints_enabled': 'True', 'cache_selected_only': 'False', 'partial_parse': 'True', 'warn_error': 'None', 'no_print': 'None', 'log_format': 'default', 'fail_fast': 'False', 'static_parser': 'True', 'version_check': 'True', 'use_colors': 'True', 'profiles_dir': '/Users/danakaliberda/.dbt', 'introspect': 'True', 'debug': 'False', 'maximum_seed_size_mib': '1', 'send_anonymous_usage_stats': 'True', 'log_path': 'logs', 'empty': 'None', 'quiet': 'False', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'printer_width': '80', 'target_path': 'None', 'invocation_command': 'dbt init flights_iceberg --skip-profile-setup', 'log_cache_events': 'False', 'use_experimental_parser': 'False', 'indirect_selection': 'eager', 'write_json': 'True'}
+[0m19:36:59.484761 [debug] [MainThread]: Starter project path: /Users/danakaliberda/VS_Python/Weather_Airport/.venv/lib/python3.13/site-packages/dbt/include/starter_project
+[0m19:36:59.489701 [info ] [MainThread]: Your new dbt project "flights_iceberg" was created!
+Initialized new project in /Users/danakaliberda/VS_Python/Weather_Airport/flights_iceberg/flights_iceberg
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m19:36:59.500446 [debug] [MainThread]: Resource report: {"command_name": "init", "command_success": true, "command_wall_clock_time": 0.08178688, "process_in_blocks": "0", "process_kernel_time": 0.212079, "process_mem_max_rss": "126648320", "process_out_blocks": "0", "process_user_time": 0.695279}
+[0m19:36:59.500859 [debug] [MainThread]: Command `dbt init` succeeded at 19:36:59.500762 after 0.08 seconds
+[0m19:36:59.501176 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x116171f30>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x115f9a8d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x11612a8b0>]}
+[0m19:36:59.501420 [debug] [MainThread]: Flushing usage events
+[0m19:37:01.073062 [debug] [MainThread]: An error was encountered while trying to flush usage events
