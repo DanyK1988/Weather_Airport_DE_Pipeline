@@ -28,3 +28,7 @@ seaborn
 scikit-learn
 ipykernel
 kafka-python
+minio
+pyiceberg[pyarrow]
+dbt-trino
+pyiceberg[pyiceberg-core]

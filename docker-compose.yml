@@ -295,6 +295,73 @@ services:
       - kafka
     restart: on-failure
 
+  minio:
+    image: quay.io/minio/minio:latest
+    container_name: flight_minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+    volumes:
+      - minio_data:/data
+    command: server /data --console-address ":9001"
+
+  minio-client:
+    image: quay.io/minio/mc:latest
+    container_name: flight_minio_client
+    depends_on:
+      - minio
+    entrypoint: /bin/sh
+    stdin_open: true
+    tty: true
+
+  
+  minio-init:
+    image: quay.io/minio/mc:latest
+    container_name: flight_minio_init
+    depends_on:
+      - minio
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+    entrypoint: >
+      /bin/sh -c "
+      until mc alias set local http://minio:9000 \$MINIO_ROOT_USER \$MINIO_ROOT_PASSWORD; do sleep 1; done;
+      mc mb --ignore-existing local/flight-raw-landing;
+      mc mb --ignore-existing local/flight-lakehouse;
+      exit 0;
+      "
+  iceberg-rest:
+    image: apache/iceberg-rest-fixture:latest
+    container_name: flight_iceberg_rest
+    ports:
+      - "8181:8181"
+    environment:
+      CATALOG_WAREHOUSE: s3://flight-lakehouse/
+      CATALOG_IO__IMPL: org.apache.iceberg.aws.s3.S3FileIO
+      CATALOG_S3_ENDPOINT: http://minio:9000
+      CATALOG_S3_PATH__STYLE__ACCESS: "true"
+      CATALOG_S3_ACCESS__KEY__ID: ${MINIO_ROOT_USER}
+      CATALOG_S3_SECRET__ACCESS__KEY: ${MINIO_ROOT_PASSWORD}
+      AWS_REGION: us-east-1
+    depends_on:
+      - minio
+
+  trino:
+    image: trinodb/trino:latest
+    container_name: flight_trino
+    ports:
+      - "8090:8080"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+    volumes:
+      - ./trino/catalog:/etc/trino/catalog
+    depends_on:
+      - iceberg-rest
+      - minio
 
 volumes:
   postgresql_data:
@@ -303,5 +370,6 @@ volumes:
   prometheus_data:
   loki_data:
   kafka_data:
+  minio_data:
 
 
